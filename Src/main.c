@@ -1809,6 +1809,10 @@ int main(void)
     loadEEpromSettings();
 #endif
 
+#ifdef DRONIVO_ESC_F051
+    eepromBuffer.use_sine_start = 0;
+#endif
+
     if (VERSION_MAJOR != eepromBuffer.version.major || VERSION_MINOR != eepromBuffer.version.minor || EEPROM_VERSION > eepromBuffer.eeprom_version) {
         eepromBuffer.version.major = VERSION_MAJOR;
         eepromBuffer.version.minor = VERSION_MINOR;

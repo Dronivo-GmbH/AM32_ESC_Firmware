@@ -29,7 +29,11 @@ void receiveDshotDma()
     RCC->APB2RSTR |= LL_APB1_GRP2_PERIPH_TIM15;
     RCC->APB2RSTR &= ~LL_APB1_GRP2_PERIPH_TIM15;
 #endif
+#ifdef INPUT_ON_TI2
+    IC_TIMER_REGISTER->CCMR1 = 0x4002; // TODO VERIFY vs RM0091: channel 1 captures from TI2 (PB5)
+#else
     IC_TIMER_REGISTER->CCMR1 = 0x41;
+#endif
     IC_TIMER_REGISTER->CCER = 0xa;
     IC_TIMER_REGISTER->PSC = ic_timer_prescaler;
     IC_TIMER_REGISTER->ARR = 0xFFFF;
